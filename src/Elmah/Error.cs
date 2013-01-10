@@ -36,6 +36,8 @@ namespace Elmah
     using Mannex;
     using Thread = System.Threading.Thread;
     using NameValueCollection = System.Collections.Specialized.NameValueCollection;
+	using System.Security.Cryptography;
+	using System.Text;
 
     #endregion
 
@@ -141,6 +143,10 @@ namespace Elmah
                 });
 
                 _serverVariables = CopyCollection(request.ServerVariables);
+
+				// patch to include raw URL so error reports are useful when URL rewriting (isite/dvanderwilt)
+				_serverVariables.Add("RAW_URL", context.Request.RawUrl);
+
                 _queryString = CopyCollection(qsfc.QueryString);
                 _form = CopyCollection(qsfc.Form);
                 _cookies = CopyCollection(qsfc.Cookies);
@@ -154,6 +160,25 @@ namespace Elmah
                         + _detail;
             }
         }
+
+		/// <summary>
+		/// Generates a unique identitifer for this exception. Useful when tracking exceptions to dedupe instances of the same exception.
+		/// Patch kfigy/isitedesign
+		/// </summary>
+		public string UniqueId
+		{
+			get { return GetUniqueId(Exception); }
+		}
+
+		private string GetUniqueId(Exception ex)
+		{
+			var hash = new SHA1Managed();
+			var signature = ex.Message + ex.StackTrace + ((ex.InnerException != null) ? GetUniqueId(ex.InnerException) : string.Empty);
+
+			var result = hash.ComputeHash(Encoding.UTF8.GetBytes(signature));
+			
+			return Convert.ToBase64String(result);
+		}
 
         private static string TryGetHtmlErrorMessage(HttpException e)
         {
