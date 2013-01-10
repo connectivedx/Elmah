@@ -13,8 +13,8 @@ namespace Elmah
 
 		public ThrottlingErrorMailModule()
 		{
-			ThrottleInterval = 5;
-			ThrottleMinutes = 1;
+			ThrottleInterval = 50;
+			ThrottleMinutes = 10;
 		}
 
 		public int ThrottleInterval { get; set; }
