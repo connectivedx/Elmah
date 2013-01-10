@@ -52,7 +52,7 @@
 			}
 		}
 		
-		<ul style="padding:0; margin: 0 0 1em 0; list-style-type: none">
+		<ul style="padding: 0; margin: 0; list-style-type: none">
 			<li style="margin:0"><a href="@protocol@host@rawUrl">@protocol@host@rawUrl</a></li>
 			@if (error.Time != DateTime.MinValue)
 			{
@@ -60,6 +60,7 @@
 			}
 			<li style="margin:0"><strong>@ErrorCount</strong> occurrences of this error recently</li>
 		</ul>
+		<br />
 		
         @if (error.Detail.Length != 0)
         {

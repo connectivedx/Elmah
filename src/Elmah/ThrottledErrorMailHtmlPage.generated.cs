@@ -133,8 +133,8 @@ WriteLiteral("</h1>\r\n\r\n");
             
             #line default
             #line hidden
-WriteLiteral("\t\t\r\n\t\t<ul style=\"padding:0; margin: 0 0 1em 0; list-style-type: none\">\r\n\t\t\t<li st" +
-"yle=\"margin:0\"><a href=\"");
+WriteLiteral("\t\t\r\n\t\t<ul style=\"padding: 0; margin: 0; list-style-type: none\">\r\n\t\t\t<li style=\"ma" +
+"rgin:0\"><a href=\"");
 
 
             
@@ -237,11 +237,11 @@ WriteLiteral("\t\t\t<li style=\"margin:0\"><strong>");
             
             #line default
             #line hidden
-WriteLiteral("</strong> occurrences of this error recently</li>\r\n\t\t</ul>\r\n\t\t\r\n");
+WriteLiteral("</strong> occurrences of this error recently</li>\r\n\t\t</ul>\r\n\t\t<br />\r\n\t\t\r\n");
 
 
             
-            #line 64 "..\..\ThrottledErrorMailHtmlPage.cshtml"
+            #line 65 "..\..\ThrottledErrorMailHtmlPage.cshtml"
          if (error.Detail.Length != 0)
         {
 
@@ -255,7 +255,7 @@ WriteLiteral("<pre style=\"padding: 1em; background-color: #FFFFCC; font-family:
 
 
             
-            #line 69 "..\..\ThrottledErrorMailHtmlPage.cshtml"
+            #line 70 "..\..\ThrottledErrorMailHtmlPage.cshtml"
                                                                                                           Write(error.Detail);
 
             
@@ -265,7 +265,7 @@ WriteLiteral("</pre>\r\n");
 
 
             
-            #line 70 "..\..\ThrottledErrorMailHtmlPage.cshtml"
+            #line 71 "..\..\ThrottledErrorMailHtmlPage.cshtml"
         }
 
             
@@ -275,7 +275,7 @@ WriteLiteral("\t\t\r\n");
 
 
             
-            #line 72 "..\..\ThrottledErrorMailHtmlPage.cshtml"
+            #line 73 "..\..\ThrottledErrorMailHtmlPage.cshtml"
   		
 			var ignoredVarPrefixes = new List<string>();
 			ignoredVarPrefixes.Add("CERT_");
@@ -294,7 +294,7 @@ WriteLiteral("\r\n");
 
 
             
-            #line 83 "..\..\ThrottledErrorMailHtmlPage.cshtml"
+            #line 84 "..\..\ThrottledErrorMailHtmlPage.cshtml"
  		foreach (var collection in 
             from collection in new[] 
             {
@@ -325,7 +325,7 @@ WriteLiteral("            <div id=\"");
 
 
             
-            #line 105 "..\..\ThrottledErrorMailHtmlPage.cshtml"
+            #line 106 "..\..\ThrottledErrorMailHtmlPage.cshtml"
                 Write(collection.Id);
 
             
@@ -336,7 +336,7 @@ WriteLiteral("\">\r\n                <h2 style=\"font-size: medium; font-style: 
 
 
             
-            #line 106 "..\..\ThrottledErrorMailHtmlPage.cshtml"
+            #line 107 "..\..\ThrottledErrorMailHtmlPage.cshtml"
                                                                            Write(collection.Title);
 
             
@@ -350,7 +350,7 @@ WriteLiteral(@"</h2>
 
 
             
-            #line 110 "..\..\ThrottledErrorMailHtmlPage.cshtml"
+            #line 111 "..\..\ThrottledErrorMailHtmlPage.cshtml"
                      foreach (var item in collection.Items.Where(x=>!ignoredVarPrefixes.Any(y=>x.Key.StartsWith(y))))
                     {
 
@@ -362,7 +362,7 @@ WriteLiteral("\t                    <tr style=\"vertical-align: top;\">\r\n\t\t\
 
 
             
-            #line 113 "..\..\ThrottledErrorMailHtmlPage.cshtml"
+            #line 114 "..\..\ThrottledErrorMailHtmlPage.cshtml"
                                                      Write(item.Key);
 
             
@@ -373,7 +373,7 @@ WriteLiteral("</td>\r\n\t\t\t\t\t\t\t<td style=\"border: 1px solid black; paddin
 
 
             
-            #line 114 "..\..\ThrottledErrorMailHtmlPage.cshtml"
+            #line 115 "..\..\ThrottledErrorMailHtmlPage.cshtml"
                                                                                                 Write(item.Value);
 
             
@@ -383,7 +383,7 @@ WriteLiteral("</td>\r\n\t\t\t\t\t\t</tr>\r\n");
 
 
             
-            #line 116 "..\..\ThrottledErrorMailHtmlPage.cshtml"
+            #line 117 "..\..\ThrottledErrorMailHtmlPage.cshtml"
                     }
 
             
@@ -393,7 +393,7 @@ WriteLiteral("                </table>\r\n            </div>\r\n");
 
 
             
-            #line 119 "..\..\ThrottledErrorMailHtmlPage.cshtml"
+            #line 120 "..\..\ThrottledErrorMailHtmlPage.cshtml"
         }
 
             
