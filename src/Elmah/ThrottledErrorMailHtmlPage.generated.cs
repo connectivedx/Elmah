@@ -77,23 +77,16 @@ WriteLiteral("<html>\r\n    <head>\r\n        <title>Error: ");
 WriteLiteral(@"</title>
         <style type=""text/css"">
             body { font-family: verdana, arial, helvetic; font-size: x-small; }
-            table.collection { border-collapse: collapse; border-spacing: 0; border: 1px solid black; width: 100% }
-            table.collection tr { vertical-align: top; }
-            table.collection th { text-align: left; border: 1px solid black; padding: 4px; font-weight: bold; }
-            table.collection td { border: 1px solid black; padding: 4px; }
             td, th, pre { font-size: x-small; } 
-            #errorDetail { padding: 1em; background-color: #FFFFCC; } 
-            #errorMessage { font-size: medium; font-style: italic; color: maroon; }
-            h1 { font-size: small; }
         </style>
     </head>
     <body>
-        <p id=""errorMessage"">");
+		<h1 style=""font-size: medium; font-style: italic; color: maroon;"">");
 
 
             
-            #line 36 "..\..\ThrottledErrorMailHtmlPage.cshtml"
-                        Write(error.Type);
+            #line 29 "..\..\ThrottledErrorMailHtmlPage.cshtml"
+                                                               Write(error.Type);
 
             
             #line default
@@ -102,56 +95,153 @@ WriteLiteral(": ");
 
 
             
-            #line 36 "..\..\ThrottledErrorMailHtmlPage.cshtml"
-                                     Write(error.Message);
+            #line 29 "..\..\ThrottledErrorMailHtmlPage.cshtml"
+                                                                            Write(error.Message);
 
             
             #line default
             #line hidden
-WriteLiteral(" (");
+WriteLiteral("</h1>\r\n\r\n");
 
 
             
-            #line 36 "..\..\ThrottledErrorMailHtmlPage.cshtml"
-                                                     Write(this.ErrorCount);
+            #line 31 "..\..\ThrottledErrorMailHtmlPage.cshtml"
+  		
+			var rawUrl = error.ServerVariables.Get("RAW_URL");
+			if(string.IsNullOrEmpty(rawUrl))
+			{
+				rawUrl = "no-url";
+			}
 
-            
-            #line default
-            #line hidden
-WriteLiteral(" occurrences recently)</p>\r\n");
+			var host = error.ServerVariables.Get("HTTP_HOST");
+			if (string.IsNullOrEmpty(host))
+			{
+				host = "no-hostname";
+			}
 
-
-            
-            #line 37 "..\..\ThrottledErrorMailHtmlPage.cshtml"
-         if (error.Time != DateTime.MinValue)
-        {
-
-            
-            #line default
-            #line hidden
-WriteLiteral("            <p>Generated: ");
-
-
-            
-            #line 39 "..\..\ThrottledErrorMailHtmlPage.cshtml"
-                     Write(error.Time.ToUniversalTime().ToString("r"));
-
-            
-            #line default
-            #line hidden
-WriteLiteral("</p>\r\n");
-
-
-            
-            #line 40 "..\..\ThrottledErrorMailHtmlPage.cshtml"
-        }
+			var protocol = error.ServerVariables.Get("HTTPS");
+			if (string.IsNullOrEmpty(protocol) || protocol == "off")
+			{
+				protocol = "http://";
+			}
+			else
+			{
+				protocol = "https://";
+			}
+		
 
             
             #line default
             #line hidden
+WriteLiteral("\t\t\r\n\t\t<ul style=\"padding:0; margin: 0; list-style-type: none\">\r\n\t\t\t<li style=\"mar" +
+"gin:0\"><a href=\"");
+
 
             
-            #line 41 "..\..\ThrottledErrorMailHtmlPage.cshtml"
+            #line 56 "..\..\ThrottledErrorMailHtmlPage.cshtml"
+                            Write(protocol);
+
+            
+            #line default
+            #line hidden
+
+            
+            #line 56 "..\..\ThrottledErrorMailHtmlPage.cshtml"
+                                     Write(host);
+
+            
+            #line default
+            #line hidden
+
+            
+            #line 56 "..\..\ThrottledErrorMailHtmlPage.cshtml"
+                                          Write(rawUrl);
+
+            
+            #line default
+            #line hidden
+WriteLiteral("\">");
+
+
+            
+            #line 56 "..\..\ThrottledErrorMailHtmlPage.cshtml"
+                                                   Write(protocol);
+
+            
+            #line default
+            #line hidden
+
+            
+            #line 56 "..\..\ThrottledErrorMailHtmlPage.cshtml"
+                                                            Write(host);
+
+            
+            #line default
+            #line hidden
+
+            
+            #line 56 "..\..\ThrottledErrorMailHtmlPage.cshtml"
+                                                                 Write(rawUrl);
+
+            
+            #line default
+            #line hidden
+WriteLiteral("</a></li>\r\n");
+
+
+            
+            #line 57 "..\..\ThrottledErrorMailHtmlPage.cshtml"
+ 			if (error.Time != DateTime.MinValue)
+			{
+
+            
+            #line default
+            #line hidden
+WriteLiteral("\t\t\t\t<li style=\"margin:0\"><strong>");
+
+
+            
+            #line 59 "..\..\ThrottledErrorMailHtmlPage.cshtml"
+                            Write(error.Time.ToLocalTime().ToString("h:mm:ss tt"));
+
+            
+            #line default
+            #line hidden
+WriteLiteral("</strong> ");
+
+
+            
+            #line 59 "..\..\ThrottledErrorMailHtmlPage.cshtml"
+                                                                                      Write(error.Time.ToLocalTime().ToString("M/d/yyyy"));
+
+            
+            #line default
+            #line hidden
+WriteLiteral(" (server time)</li>\r\n");
+
+
+            
+            #line 60 "..\..\ThrottledErrorMailHtmlPage.cshtml"
+			}
+
+            
+            #line default
+            #line hidden
+WriteLiteral("\t\t\t<li style=\"margin:0\"><strong>");
+
+
+            
+            #line 61 "..\..\ThrottledErrorMailHtmlPage.cshtml"
+                           Write(ErrorCount);
+
+            
+            #line default
+            #line hidden
+WriteLiteral("</strong> occurrences of this error recently</li>\r\n\t\t</ul>\r\n\t\t\r\n");
+
+
+            
+            #line 64 "..\..\ThrottledErrorMailHtmlPage.cshtml"
          if (error.Detail.Length != 0)
         {
 
@@ -160,12 +250,13 @@ WriteLiteral("</p>\r\n");
             #line hidden
 
 
-WriteLiteral("<pre id=\"errorDetail\">");
+WriteLiteral("<pre style=\"padding: 1em; background-color: #FFFFCC; font-family: Consolas, Couri" +
+"er, monospace;\">");
 
 
             
-            #line 46 "..\..\ThrottledErrorMailHtmlPage.cshtml"
-                               Write(error.Detail);
+            #line 69 "..\..\ThrottledErrorMailHtmlPage.cshtml"
+                                                                                                          Write(error.Detail);
 
             
             #line default
@@ -174,16 +265,37 @@ WriteLiteral("</pre>\r\n");
 
 
             
-            #line 47 "..\..\ThrottledErrorMailHtmlPage.cshtml"
+            #line 70 "..\..\ThrottledErrorMailHtmlPage.cshtml"
         }
 
             
             #line default
             #line hidden
+WriteLiteral("\t\t\r\n");
+
 
             
-            #line 48 "..\..\ThrottledErrorMailHtmlPage.cshtml"
-         foreach (var collection in 
+            #line 72 "..\..\ThrottledErrorMailHtmlPage.cshtml"
+  		
+			var ignoredVarPrefixes = new List<string>();
+			ignoredVarPrefixes.Add("CERT_");
+			ignoredVarPrefixes.Add("ALL_");
+			ignoredVarPrefixes.Add("APPL_");
+			ignoredVarPrefixes.Add("GATEWAY_INTERFACE");
+			ignoredVarPrefixes.Add("HTTPS_");
+			ignoredVarPrefixes.Add("INSTANCE_");
+			ignoredVarPrefixes.Add("SERVER_SOFTWARE");
+		
+
+            
+            #line default
+            #line hidden
+WriteLiteral("\r\n");
+
+
+            
+            #line 83 "..\..\ThrottledErrorMailHtmlPage.cshtml"
+ 		foreach (var collection in 
             from collection in new[] 
             {
                 new
@@ -213,59 +325,65 @@ WriteLiteral("            <div id=\"");
 
 
             
-            #line 70 "..\..\ThrottledErrorMailHtmlPage.cshtml"
+            #line 105 "..\..\ThrottledErrorMailHtmlPage.cshtml"
                 Write(collection.Id);
 
             
             #line default
             #line hidden
-WriteLiteral("\">\r\n                <h1>");
+WriteLiteral("\">\r\n                <h2 style=\"font-size: medium; font-style: italic; color: gray" +
+";\">");
 
 
             
-            #line 71 "..\..\ThrottledErrorMailHtmlPage.cshtml"
-               Write(collection.Title);
+            #line 106 "..\..\ThrottledErrorMailHtmlPage.cshtml"
+                                                                           Write(collection.Title);
 
             
             #line default
             #line hidden
-WriteLiteral("</h1>\r\n                <table class=\"collection\">\r\n                    <tr><th>Na" +
-"me</th>            \r\n                        <th>Value</th></tr>\r\n");
+WriteLiteral(@"</h2>
+                <table style=""border-collapse: collapse; border-spacing: 0; border: 1px solid black; width: 100%"">
+                    <tr><th style=""text-align: left; border: 1px solid black; padding: 4px;"">Name</th>            
+                        <th style=""text-align: left; border: 1px solid black; padding: 4px;"">Value</th></tr>
+");
 
 
             
-            #line 75 "..\..\ThrottledErrorMailHtmlPage.cshtml"
-                     foreach (var item in collection.Items)
+            #line 110 "..\..\ThrottledErrorMailHtmlPage.cshtml"
+                     foreach (var item in collection.Items.Where(x=>!ignoredVarPrefixes.Any(y=>x.Key.StartsWith(y))))
                     {
 
             
             #line default
             #line hidden
-WriteLiteral("                        <tr><td>");
+WriteLiteral("\t                    <tr style=\"vertical-align: top;\">\r\n\t\t\t\t\t\t\t<td style=\"border:" +
+" 1px solid black; padding: 4px;\">");
 
 
             
-            #line 77 "..\..\ThrottledErrorMailHtmlPage.cshtml"
-                           Write(item.Key);
-
-            
-            #line default
-            #line hidden
-WriteLiteral("</td>\r\n                            <td>");
-
-
-            
-            #line 78 "..\..\ThrottledErrorMailHtmlPage.cshtml"
-                           Write(item.Value);
+            #line 113 "..\..\ThrottledErrorMailHtmlPage.cshtml"
+                                                     Write(item.Key);
 
             
             #line default
             #line hidden
-WriteLiteral("</td></tr>\r\n");
+WriteLiteral("</td>\r\n\t\t\t\t\t\t\t<td style=\"border: 1px solid black; padding: 4px; font-family: Cons" +
+"olas, Courier, monospace;\">");
 
 
             
-            #line 79 "..\..\ThrottledErrorMailHtmlPage.cshtml"
+            #line 114 "..\..\ThrottledErrorMailHtmlPage.cshtml"
+                                                                                                Write(item.Value);
+
+            
+            #line default
+            #line hidden
+WriteLiteral("</td>\r\n\t\t\t\t\t\t</tr>\r\n");
+
+
+            
+            #line 116 "..\..\ThrottledErrorMailHtmlPage.cshtml"
                     }
 
             
@@ -275,44 +393,13 @@ WriteLiteral("                </table>\r\n            </div>\r\n");
 
 
             
-            #line 82 "..\..\ThrottledErrorMailHtmlPage.cshtml"
+            #line 119 "..\..\ThrottledErrorMailHtmlPage.cshtml"
         }
 
             
             #line default
             #line hidden
-WriteLiteral("        <p>Powered by <a href=\"http://elmah.googlecode.com/\">");
-
-
-            
-            #line 83 "..\..\ThrottledErrorMailHtmlPage.cshtml"
-                                                        Write(about.Product);
-
-            
-            #line default
-            #line hidden
-WriteLiteral("</a>, \r\n            version ");
-
-
-            
-            #line 84 "..\..\ThrottledErrorMailHtmlPage.cshtml"
-               Write(about.Version);
-
-            
-            #line default
-            #line hidden
-WriteLiteral(" (isitedesign-mod)\r\n            ");
-
-
-            
-            #line 85 "..\..\ThrottledErrorMailHtmlPage.cshtml"
-       Write(about.Copyright);
-
-            
-            #line default
-            #line hidden
-WriteLiteral(" \r\n            Licensed under <a href=\"http://www.apache.org/licenses/LICENSE-2.0" +
-"\">Apache License, Version 2.0</a>. \r\n        </p>\r\n    </body>\r\n</html>\r\n");
+WriteLiteral("    </body>\r\n</html>\r\n");
 
 
         }

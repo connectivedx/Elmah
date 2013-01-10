@@ -13,8 +13,8 @@ namespace Elmah
 
 		public ThrottlingErrorMailModule()
 		{
-			ThrottleInterval = 50;
-			ThrottleMinutes = 10;
+			ThrottleInterval = 5;
+			ThrottleMinutes = 1;
 		}
 
 		public int ThrottleInterval { get; set; }
@@ -37,13 +37,29 @@ namespace Elmah
 				return true;
 			}
 
-			// if the error last occurred too long ago, resend email
-			if (errorState.Item1 < DateTime.Now.AddMinutes(-ThrottleMinutes))
-				return true;
+			// if we got here that means the error has been logged before
+			// now if either it's been longer than ThrottleMinutes since the last email was sent,
+			// OR if the error count is a multiple of ThrottleInterval, we want to send another email
 
-			// if the error has occurred a multiple of the interval times, resend email
-			if (errorState.Item2 % ThrottleInterval == 0)
+			// increment the count of the existing entry and save it (note triple assign)
+			var newErrorState = LogHistory[signature] = Tuple.Create(errorState.Item1, errorState.Item2 + 1);
+
+			// if the last email occurred too long ago, resend email (ie if an error occurs twice an hour, two emails would be sent if minutes were 20)
+			if (errorState.Item1 < DateTime.Now.AddMinutes(-ThrottleMinutes))
+			{
+				// set the timestamp to right now since this error is now valid once due to its timestamp (this makes it not fail the time check again for interval minutes)
+				LogHistory[signature] = Tuple.Create(DateTime.Now, newErrorState.Item2);
 				return true;
+			}
+
+			// if the error has occurred a multiple of the interval times, resend email (note checking updated state with current count)
+			if (newErrorState.Item2%ThrottleInterval == 0)
+			{
+				// set the timestamp to right now since this error is now valid once due to its error count (this makes it not fail the time check again for interval minutes)
+				// we reset this here so you wouldn't get a time-based email within the minutes interval if the error count became higher than threshold
+				LogHistory[signature] = Tuple.Create(DateTime.Now, newErrorState.Item2);
+				return true;
+			}
 
 			return false;
 		}
