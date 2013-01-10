@@ -209,6 +209,11 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
+    <Compile Include="ThrottledErrorMailHtmlPage.generated.cs">
+      <DependentUpon>ThrottledErrorMailHtmlPage.cshtml</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="DelegatingHttpTaskAsyncHandler.cs" />
     <Compile Include="ErrorMailHtmlPage.generated.cs">
       <DependentUpon>ErrorMailHtmlPage.cshtml</DependentUpon>
@@ -228,6 +233,9 @@
     <Compile Include="MoreLinq\MoreEnumerable.ToDelimitedString.cs" />
     <Compile Include="StackTraceParser.cs" />
     <Compile Include="StyleSheetHelper.cs" />
+    <Compile Include="ThrottledErrorMailHtmlFormatter.cs" />
+    <Compile Include="ThrottledErrorMailHtmlPage.cs" />
+    <Compile Include="ThrottlingErrorMailModule.cs" />
     <Compile Include="TypeExtensions.cs" />
     <Compile Include="ErrorDetailPage.generated.cs">
       <DependentUpon>ErrorDetailPage.cshtml</DependentUpon>
@@ -422,6 +430,10 @@
     <None Include="AboutPage.cshtml">
       <Generator>RazorGenerator</Generator>
       <LastGenOutput>AboutPage.generated.cs</LastGenOutput>
+    </None>
+    <None Include="ThrottledErrorMailHtmlPage.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>ThrottledErrorMailHtmlPage.generated.cs</LastGenOutput>
     </None>
     <None Include="ErrorMailHtmlPage.cshtml">
       <Generator>RazorGenerator</Generator>

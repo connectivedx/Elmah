@@ -510,7 +510,7 @@ namespace Elmah
             }
         }
 
-        private static MailAttachment CreateHtmlAttachment(string name, string html)
+        protected static MailAttachment CreateHtmlAttachment(string name, string html)
         {
             Debug.AssertStringNotEmpty(name);
             Debug.AssertStringNotEmpty(html);
