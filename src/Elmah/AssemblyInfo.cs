@@ -38,8 +38,8 @@ using InternalsVisibleToAttribute = System.Runtime.CompilerServices.InternalsVis
 [assembly: AssemblyCopyright("Copyright \u00a9 2004, Atif Aziz. All rights reserved.")]
 [assembly: AssemblyCulture("")]
 
-[assembly: AssemblyVersion("2.0.15523.27")]
-[assembly: AssemblyFileVersion("2.0.15523.27")]
+[assembly: AssemblyVersion("2.3.0")]
+[assembly: AssemblyFileVersion("2.3.0")]
 [assembly: AssemblyConfiguration(Elmah.Build.Configuration)]
 
 [assembly: CLSCompliant(true)] 

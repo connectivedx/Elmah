@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>Isite.Elmah</id>
+    <version>$version$</version>
+    <authors>Atif Aziz</authors>
+    <owners>ISITE Design</owners>
+    <licenseUrl>http://www.apache.org/licenses/LICENSE-2.0</licenseUrl>
+    <projectUrl>https://code.google.com/p/elmah/</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>ELMAH, ISITE Design fork. ELMAH (Error Logging Modules and Handlers) is an application-wide error logging facility that is completely pluggable. It can be dynamically added to a running ASP.NET web application, or even all ASP.NET web applications on a machine, without any need for re-compilation or re-deployment.</description>
+    <releaseNotes>This version includes improved error email formatting and throttling email messages</releaseNotes>
+    <tags>elmah error logging unhandled exception</tags>
+  </metadata>
+</package>
