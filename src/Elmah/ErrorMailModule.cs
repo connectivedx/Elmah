@@ -566,7 +566,17 @@ namespace Elmah
 
             client.EnableSsl = UseSsl;
 
-            client.Send(mail);
+            try
+            {
+                client.Send(mail);
+            }
+            catch (Exception ex)
+            {
+                // an exception here would cause the app pool to terminate!
+                // unfortunately there's not much we can do other than swallow it
+                // we'll send it off to any trace listeners we may have though.
+                Trace.TraceError("Error sending mail! {0}\n{1}", ex.Message, ex.StackTrace);
+            }
         }
 
         /// <summary>
