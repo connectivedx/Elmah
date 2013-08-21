@@ -1,6 +1,7 @@
 syntax: glob
 bin/**
 Bin/**
+src/*/obj/**
 *.dll
 *.pdb
 *.user
@@ -22,5 +23,3 @@ samples/Demo/Mails/*
 samples/Demo/App_Data/*
 samples/Demo/Web.config
 packages/**
-.nuget/NuGet.exe
-.nuget/nuget.exe
